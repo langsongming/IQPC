@@ -1,11 +1,11 @@
-# Is my problem new?
-A simple semantic search engine on competitive programming problems.
+# 这是一个具有创新性的问题吗？（信息学题目查重系统V1.0）
 
-[Demo server](http://45.63.4.94:1234/) (while supplies last...) <a href="https://www.buymeacoffee.com/fjzzq2002" target="_blank" style="color: brown">[Buy me a boba]</a>
+一个关于信息学编程问题的简单查重系统，收集了几万道信息学公开题目（也包括一些自创的题目）。
 
-*The included problems of Codeforces & BZOJ are for fair uses only. Their copyrights belong to the original authors and the LICENSE included only apply for the source codes included in this repository.*
+### [$\color{red}在线使用$](https://www.xinxixuechachong.com) 
+*洛谷、UVA、shury OI、Atcoder、MXOJ、LLong OJ、Codeforces和BZOJ等问题仅供合理使用。它们的版权属于原始作者，所包含的许可证仅适用于此存储库中包含的源代码.*
 
-#### Screenshots
+#### 演示截图
 
 ![](screenshots/demo1.png)
 
@@ -13,40 +13,14 @@ A simple semantic search engine on competitive programming problems.
 
 ![](screenshots/demo2.png)
 
-#### How does this work?
+#### 这套系统是如何工作的？
 
-This idea is simple:
+##### 工作原理很简单：
 
-1. Simplify the statement & remove background by prompting chatgpt.
+1.简化陈述并且进行翻译
 
-2. Embed the simplified documents and queries to perform vector searches.
+2.查询已被简化过描述的数据库中的题目
 
-It only happens recently that both models are good and cheap enough.
+3.删除您搜索的题目
 
-This pipeline is also not limited, of course, to competitive programming problems. You can use it to search for any kind of documents by modifying the prompt.
-
-#### Deploy
-
-*Disclaimer:* This project was finished in ~2 days so do not expect high quality code. Deploy at your own risk. If you want to serve it publicly, add safety measures such as rate limits, authentication, etc.
-
-You will need API keys from OpenAI (https://platform.openai.com/) and Cohere (https://cohere.com/). The model `gpt-3.5-turbo` (also known as chatgpt) from OpenAI and `cohere-embed-english-v3.0` from Cohere (empirically works better than OpenAI's embeddings at the same price) are used. You can check their pricings online.
-
-1. Copy `settings_sample.json` to `settings.json`. Fill in the API keys.
-
-2. Download embeddings from [here](https://drive.google.com/drive/folders/1QSxokxoh5XTSFKP0xNFDNG7SG9MdvzW6?usp=sharing) and place it in the folder (so that `embs/embs_cohere.npy` exists) or run `python -m src.build_embedding.py` (regenerate embeddings using cohere, costs ~$0.5).
-
-3. Run `python -m src.ui.py` to start your server!
-
-*Can we make this completely open-source?* You will need to replace the summary model and the embedding model with open source versions. For embedding models, [this leaderboard](https://huggingface.co/spaces/mteb/leaderboard) may be a good place to look for.
-
-#### Adding a new set of problems
-
-1. Generate a json file in `problems/` folder. You should supply `uid`, `url`, `tag` and `statement` fields. See `problems/format.md` for detailed specifications and see `src/scrapper/` for two examples: a crawler for Codeforces and a parser for bzoj (using a local dump).
-
-2. Generate summaries with ChatGPT. Run `python -m src.build_summary.py`.
-
-3. Generate embeddings with Cohere. Run `python -m src.build_embedding.py`.
-
-For reference, adding all problems from codeforces & bzoj costs about $20.
-
-*Known issue:* The OpenAI api has a rate limit and to make sure our requests fit in the limit, currently the code sleeps after requests following to the rate limit. You may want to adjust the logic to increase throughput.
+当然，这个方式也不局限于信息学编程问题。您可以使用它来搜索任何类型的文档，**我们也将于 2024 年尝试性开发论文查重功能，敬请期待！**。
